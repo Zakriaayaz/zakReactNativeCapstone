@@ -10,13 +10,13 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import { validateEmail } from "../utils";
-import { AuthContext } from "../contexts/AuthContext";
 import Checkbox from "expo-checkbox";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ImagePicker from "expo-image-picker";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { validate_email } from "../utils";
+import { auth_context } from "../contexts/auth_context";
 
 const Profile = () => {
   const [profile, setProfile] = useState({
@@ -60,8 +60,8 @@ const Profile = () => {
     }
   };
 
-  const { update } = useContext(AuthContext);
-  const { logout } = useContext(AuthContext);
+  const { update } = useContext(auth_context);
+  const { logout } = useContext(auth_context);
 
   const updateProfile = (key, value) => {
     setProfile(prevState => ({
@@ -94,7 +94,7 @@ const Profile = () => {
     return (
       !validateName(profile.firstName) &&
       !validateName(profile.lastName) &&
-      validateEmail(profile.email) &&
+      validate_email(profile.email) &&
       validateNumber(profile.phoneNumber)
     );
   };
@@ -198,7 +198,7 @@ const Profile = () => {
         <Text
           style={[
             styles.text,
-            validateEmail(profile.email) ? "" : styles.error,
+            validate_email(profile.email) ? "" : styles.error,
           ]}
         >
           Email
@@ -264,7 +264,7 @@ const Profile = () => {
           />
           <Text style={styles.paragraph}>Newsletter</Text>
         </View>
-        <Pressable style={styles.btn} onPress={() => logout()}>
+        <Pressable style={styles.butn} onPress={() => logout()}>
           <Text style={styles.btntext}>Log out</Text>
         </Pressable>
         <View style={styles.buttons}>
@@ -272,7 +272,7 @@ const Profile = () => {
             <Text style={styles.discardBtnText}>Discard changes</Text>
           </Pressable>
           <Pressable
-            style={[styles.saveBtn, getIsFormValid() ? "" : styles.btnDisabled]}
+            style={[styles.saveBtn, getIsFormValid() ? "" : styles.u]}
             onPress={() => update(profile)}
             disabled={!getIsFormValid()}
           >
@@ -289,48 +289,48 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  logo: {
+    height: 50,
+    width: 150,
+    resizeMode: "contain",
+  },
   header: {
     padding: 12,
     flexDirection: "row",
     justifyContent: "center",
     backgroundColor: "#dee3e9",
   },
-  logo: {
-    height: 50,
-    width: 150,
-    resizeMode: "contain",
+  headertext: {
+    fontSize: 22,
+    paddingBottom: 10,
+    fontFamily: "Karla-ExtraBold",
   },
   viewScroll: {
     flex: 1,
     padding: 10,
   },
-  headertext: {
-    fontSize: 22,
-    paddingBottom: 10,
-    fontFamily: "Karla-ExtraBold",
+  inputBox: {
+    alignSelf: "stretch",
+    borderColor: "#dfdfe5",
+    marginBottom: 10,
+    fontSize: 16,
+    borderRadius: 9,
+    borderWidth: 1,
+    padding: 10,
   },
   text: {
     fontSize: 16,
     marginBottom: 5,
     fontFamily: "Karla-Medium",
   },
-  inputBox: {
-    alignSelf: "stretch",
-    marginBottom: 10,
-    borderWidth: 1,
-    padding: 10,
-    fontSize: 16,
-    borderRadius: 9,
-    borderColor: "#dfdfe5",
-  },
-  btn: {
+  butn: {
     backgroundColor: "#f4ce14",
-    borderRadius: 9,
+    borderColor: "#cc9a22",
     alignSelf: "stretch",
-    marginVertical: 18,
+    borderRadius: 9,
     padding: 10,
     borderWidth: 1,
-    borderColor: "#cc9a22",
+    marginVertical: 18,
   },
   btnDisabled: {
     backgroundColor: "#98b3aa",

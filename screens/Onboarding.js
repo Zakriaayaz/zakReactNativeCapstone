@@ -10,10 +10,10 @@ import {
   Pressable,
 } from "react-native";
 import PagerView from "react-native-pager-view";
-import { validateEmail, validateName } from "../utils";
+import { validate_email, validate_name } from "../utils/index";
 import Constants from "expo-constants";
 
-import { AuthContext } from "../contexts/AuthContext";
+import { auth_context } from "../contexts/AuthContext";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -22,12 +22,12 @@ const Onboarding = () => {
   const [lastName, onChangeLastName] = useState("");
   const [email, onChangeEmail] = useState("");
 
-  const isEmailValid = validateEmail(email);
-  const isFirstNameValid = validateName(firstName);
-  const isLastNameValid = validateName(lastName);
+  const isEmailValid = validate_email(email);
+  const isFirstNameValid = _n(firstName);
+  const isLastNameValid = _n(lastName);
   const viewPagerRef = useRef(PagerView);
 
-  const { onboard } = useContext(AuthContext);
+  const { onboard } = useContext(auth_context);
 
   // FONTS
   const [fontsLoaded] = useFonts({
@@ -86,7 +86,7 @@ const Onboarding = () => {
             <View style={styles.pageDot}></View>
           </View>
           <Pressable
-            style={[styles.btn, isFirstNameValid ? "" : styles.btnDisabled]}
+            style={[styles.butn, isFirstNameValid ? "" : styles.butn_disabled]}
             onPress={() => viewPagerRef.current.setPage(1)}
             disabled={!isFirstNameValid}
           >
@@ -110,15 +110,15 @@ const Onboarding = () => {
           </View>
           <View style={styles.buttons}>
             <Pressable
-              style={styles.halfBtn}
+              style={styles.halfButn}
               onPress={() => viewPagerRef.current.setPage(0)}
             >
               <Text style={styles.btntext}>Back</Text>
             </Pressable>
             <Pressable
               style={[
-                styles.halfBtn,
-                isLastNameValid ? "" : styles.btnDisabled,
+                styles.halfButn,
+                isLastNameValid ? "" : styles.butn_disabled,
               ]}
               onPress={() => viewPagerRef.current.setPage(2)}
               disabled={!isLastNameValid}
@@ -145,13 +145,13 @@ const Onboarding = () => {
           </View>
           <View style={styles.buttons}>
             <Pressable
-              style={styles.halfBtn}
+              style={styles.halfButn}
               onPress={() => viewPagerRef.current.setPage(1)}
             >
               <Text style={styles.btntext}>Back</Text>
             </Pressable>
             <Pressable
-              style={[styles.halfBtn, isEmailValid ? "" : styles.btnDisabled]}
+              style={[styles.halfButn, isEmailValid ? "" : styles.butn_disabled]}
               onPress={() => onboard({ firstName, lastName, email })}
               disabled={!isEmailValid}
             >
@@ -193,14 +193,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   welcomeText: {
-    fontSize: 40,
+    fontSize: 38,
     paddingVertical: 60,
     fontFamily: "MarkaziText-Medium",
     color: "#495E57",
     textAlign: "center",
   },
   text: {
-    fontSize: 24,
+    fontSize: 22,
     fontFamily: "Karla-ExtraBold",
     color: "#495E57",
   },
@@ -208,50 +208,50 @@ const styles = StyleSheet.create({
     borderColor: "#EDEFEE",
     backgroundColor: "#EDEFEE",
     alignSelf: "stretch",
-    height: 50,
-    margin: 18,
-    borderWidth: 1,
+    fontFamily: "Karla-Medium",
     padding: 10,
     fontSize: 20,
     borderRadius: 9,
-    fontFamily: "Karla-Medium",
-  },
-  btn: {
-    backgroundColor: "#f4ce14",
-    borderColor: "#f4ce14",
-    borderRadius: 9,
-    alignSelf: "stretch",
-    marginHorizontal: 18,
-    marginBottom: 60,
-    padding: 10,
+    height: 50,
+    margin: 18,
     borderWidth: 1,
   },
-  btnDisabled: {
-    backgroundColor: "#f1f4f7",
-  },
-  buttons: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginLeft: 18,
+  butn: {
+    backgroundColor: "#f4ce14",
+    borderColor: "#f4ce14",
+    alignSelf: "stretch",
+    borderRadius: 9,
+    padding: 10,
+    borderWidth: 1,
+    marginHorizontal: 18,
     marginBottom: 60,
   },
-  halfBtn: {
+  halfButn: {
     flex: 1,
     borderColor: "#f4ce14",
     backgroundColor: "#f4ce14",
-    borderRadius: 9,
     alignSelf: "stretch",
-    marginRight: 18,
+    borderRadius: 9,
     padding: 10,
     borderWidth: 1,
+    marginRight: 18,
+  },
+  butn_disabled: {
+    backgroundColor: "#f1f4f7",
   },
   btntext: {
     fontSize: 22,
     color: "#333",
     fontFamily: "Karla-Bold",
     alignSelf: "center",
+  },
+  buttons: {
+    marginLeft: 18,
+    marginBottom: 60,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   pageIndicator: {
     display: "flex",
@@ -263,15 +263,15 @@ const styles = StyleSheet.create({
   },
   pageDot: {
     backgroundColor: "#67788a",
-    width: 22,
-    height: 22,
-    marginHorizontal: 10,
     borderRadius: 11,
+    width: 20,
+    height: 20,
+    marginHorizontal: 10,
   },
   pageDotActive: {
     backgroundColor: "#f4ce14",
-    width: 22,
-    height: 22,
+    width: 20,
+    height: 20,
     borderRadius: 11,
   },
 });
