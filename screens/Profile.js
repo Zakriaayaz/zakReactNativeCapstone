@@ -16,7 +16,7 @@ import * as ImagePicker from "expo-image-picker";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { validate_email } from "../utils";
-import { auth_context } from "../contexts/auth_context";
+import { auth_context } from "../contexts/AuthContext";
 
 const Profile = () => {
   const [profile, setProfile] = useState({
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#dee3e9",
   },
   headertext: {
-    fontSize: 22,
+    fontSize: 20,
     paddingBottom: 10,
     fontFamily: "Karla-ExtraBold",
   },
@@ -309,19 +309,19 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
+  text: {
+    fontSize: 17,
+    marginBottom: 5,
+    fontFamily: "Karla-Medium",
+  },
   inputBox: {
     alignSelf: "stretch",
     borderColor: "#dfdfe5",
     marginBottom: 10,
-    fontSize: 16,
+    fontSize: 17,
     borderRadius: 9,
     borderWidth: 1,
     padding: 10,
-  },
-  text: {
-    fontSize: 16,
-    marginBottom: 5,
-    fontFamily: "Karla-Medium",
   },
   butn: {
     backgroundColor: "#f4ce14",
@@ -340,12 +340,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 60,
+    marginBottom: 55,
   },
   saveBtn: {
     flex: 1,
     backgroundColor: "#495e57",
-    borderRadius: 9,
+    borderRadius: 8,
     alignSelf: "stretch",
     padding: 10,
     borderWidth: 1,
@@ -363,6 +363,21 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     alignSelf: "stretch",
     marginRight: 18,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#83918c",
+  },
+  changeBtn: {
+    backgroundColor: "#495e57",
+    borderRadius: 9,
+    marginHorizontal: 18,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#3f554d",
+  },
+  removeBtn: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 9,
     padding: 10,
     borderWidth: 1,
     borderColor: "#83918c",
@@ -419,21 +434,7 @@ const styles = StyleSheet.create({
   avatarButtons: {
     flexDirection: "row",
   },
-  changeBtn: {
-    backgroundColor: "#495e57",
-    borderRadius: 9,
-    marginHorizontal: 18,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#3f554d",
-  },
-  removeBtn: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 9,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#83918c",
-  },
+
 });
 
 export default Profile;

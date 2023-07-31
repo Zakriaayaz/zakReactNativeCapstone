@@ -10,6 +10,10 @@ import {
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import debounce from "lodash.debounce";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Constants from "expo-constants";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import {
   createTable,
   getMenuItems,
@@ -18,10 +22,6 @@ import {
 } from "../database";
 import Filters from "../components/Filters";
 import { getSectionListData, useUpdateEffect } from "../utils/utils";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Constants from "expo-constants";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 
 const API_URL =
   "https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/capstone.json";
@@ -264,6 +264,23 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     shadowOpacity: 0,
   },
+  name: {
+    fontSize: 20,
+    color: "#000000",
+    paddingBottom: 5,
+    fontFamily: "Karla-Bold",
+  },
+  description: {
+    color: "#495e57",
+    paddingRight: 5,
+    fontFamily: "Karla-Medium",
+  },
+  price: {
+    fontSize: 20,
+    color: "#EE9972",
+    paddingTop: 5,
+    fontFamily: "Karla-Medium",
+  },
   item: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -282,26 +299,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     fontFamily: "Karla-ExtraBold",
   },
-  name: {
-    fontSize: 20,
-    color: "#000000",
-    paddingBottom: 5,
-    fontFamily: "Karla-Bold",
-  },
-  description: {
-    color: "#495e57",
-    paddingRight: 5,
-    fontFamily: "Karla-Medium",
-  },
-  price: {
-    fontSize: 20,
-    color: "#EE9972",
-    paddingTop: 5,
-    fontFamily: "Karla-Medium",
-  },
+
   itemImage: {
     width: 100,
     height: 100,
+  },
+  delivery: {
+    fontSize: 18,
+    padding: 15,
+    fontFamily: "Karla-ExtraBold",
   },
   avatar: {
     flex: 1,
@@ -326,16 +332,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#495e57",
     padding: 15,
   },
-  heroHeader: {
-    color: "#f4ce14",
-    fontSize: 54,
-    fontFamily: "MarkaziText-Medium",
-  },
-  heroHeader2: {
-    color: "#fff",
-    fontSize: 30,
-    fontFamily: "MarkaziText-Medium",
-  },
   heroText: {
     color: "#fff",
     fontFamily: "Karla-Medium",
@@ -353,11 +349,17 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 12,
   },
-  delivery: {
-    fontSize: 18,
-    padding: 15,
-    fontFamily: "Karla-ExtraBold",
+  heroHeader: {
+    color: "#f4ce14",
+    fontSize: 54,
+    fontFamily: "MarkaziText-Medium",
   },
+  heroHeader2: {
+    color: "#fff",
+    fontSize: 30,
+    fontFamily: "MarkaziText-Medium",
+  },
+
 });
 
 export default Home;
